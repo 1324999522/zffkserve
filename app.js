@@ -15,7 +15,6 @@ app.use(async (ctx, next) => {
     ctx.body = { msg: e.message, code: -1 }
   }
 })
-
 app.use(koaStatic(path.join(__dirname, "public")))
 app.use(koaBody({
   multipart: true, // 支持文件上传

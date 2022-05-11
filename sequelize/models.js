@@ -42,7 +42,7 @@ module.exports.goods = function (sequelize) {
             status: { type: DataTypes.STRING, allowNull: true, defaultValue: 'ON', },
             price: { type: DataTypes.DOUBLE(11, 2), allowNull: false, defaultValue: 1 },
             sort: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 0 },
-            max: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 1000 },
+            max: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 10000 },
             min: { type: DataTypes.INTEGER, allowNull: true, defaultValue: 1 },
             describe: { type: DataTypes.STRING(8000), allowNull: true, },
             img: { type: DataTypes.STRING, allowNull: true, },

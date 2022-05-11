@@ -2,6 +2,14 @@
 const { sequelize } = require('../sequelize')
 const { order, card } = sequelize.models
 class OrderController {
+  async get_page (ctx, next) {
+
+    ctx.options.order = [['id', 'DESC']]
+    ctx.options.attributes.include = [
+      [sequelize.literal(`( SELECT name FROM goods WHERE id = goods.id)`), "goodName"],
+    ]
+    await next()
+  }
   async takeCard (ctx) {
 
     const { goodId, count } = ctx.request.body
@@ -11,7 +19,7 @@ class OrderController {
       name: new Date().getTime(),
       orderPrice: orderPrice,
       goodId: goodId,
-      count, count
+      count: count
     })
     const Cards = await sellCardByOrder(Order)
 
@@ -66,7 +74,8 @@ async function sellCardByOrder (Order) {
   const Cards = await card.findAll({
     limit: count,
     where: {
-      goodId: goodId
+      goodId: goodId,
+      is_sell: 0,
     }
   })
   for (let Card of Cards) {
